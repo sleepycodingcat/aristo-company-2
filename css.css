@@ -1,0 +1,736 @@
+
+/*ACROSS ALL PAGES*/
+
+:root {
+  --aristo-red: #c1272dff;
+  --aristo-dark-yellow: #fbe492ff;
+  --aristo-pale-yellow:#fff9e1ff;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+@media screen and (max-width:600px){
+  header h1{
+    display:none;
+  }
+}
+
+header{
+  flex-wrap:wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin:20px 0px;
+}
+
+footer{
+  background-color: var(--aristo-dark-yellow);
+  height:20vh;
+}
+
+a{
+  font-family: "futura-pt-bold", sans-serif;
+}
+
+header a{
+  display:flex;
+  text-decoration: none;
+  color:black;
+}
+
+h1{
+  font-size: clamp(2.5vw,3vw,6vw);
+  margin: 20px 0px 0px 0px;
+  font-family: "futura-pt-bold", sans-serif;
+}
+
+header a:hover{
+  transition: color 0.2s;
+  color:var(--aristo-red);
+}
+
+body{
+  margin: 5vh 4vw;
+}
+
+
+#menuIcon{
+  margin:10px 0px 0px 0px;
+  font-size: clamp(5vw,5vw,12vw);
+}
+
+btn:hover{
+  cursor: pointer;
+  transition: color 0.2s;
+  color:var(--aristo-red);
+}
+
+#logo{
+  height:clamp(5vw,6vw,12vw);
+}
+
+
+click-spark{
+  --click-spark-color: var(--aristo-red);
+}
+
+/* DROP DOWN MENU */
+
+#dropdown{
+  position:absolute;
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center; /* horizontally center align */
+  text-align: center;
+  overflow:hidden;
+}
+
+#btecBtn:hover + #dropdown #dropdownContent,#dropdown #dropdownContent:hover {
+  transform: translateY(0);
+}
+
+#dropdownContent{
+  transform: translateY(-150px);
+  background-color: black;
+  padding:10px 20px;
+}
+
+#dropdown a {
+  width: 100%; /* Set the width of anchor tags to 100% */
+  text-align: center; /* center align the text within the anchor tags */
+  color:white;
+}
+
+
+
+/*LANDING PAGE ONLY*/ 
+
+#camPenContainer{
+  position:absolute;
+  height:auto;
+  width:auto;
+  display:grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 100%;
+  justify-items:center;
+  align-items: center;
+  /* to do: make this container center in middle of screen in phone screen size */
+}
+
+@media screen and (max-width: 600px) {
+  #camPenContainer{
+    height:100%;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+  }
+
+  #camImg{
+    grid-row:1/2;
+    grid-column:1/2;
+  }
+
+  #penImg{
+    grid-row: 2/3;
+    grid-column:1/2;
+  }
+
+  
+}
+
+
+
+/* WRITING STYLE */
+
+.scrollContainer{
+  overflow:hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  display:inline-block;
+  opacity:0%;
+  cursor:default;
+}
+
+@keyframes penBoundBoxBounce {
+  0%{
+    transform:translateY(0) rotate(-60deg);
+  }
+  50%{
+    transform: translateY(-15px) rotate(-60deg);
+  }
+  100%{
+    transform:translateY(0px) rotate(-60deg);
+  }
+}
+
+#penBoundingBox{
+  animation:penBoundBoxBounce 2s ease-in-out infinite;
+  display:inline-block;
+  grid-column:3/4;
+  grid-row:1/1;
+  /* position:absolute; */
+  position:relative;
+  z-index: 101;
+  width:112%;
+  height:13%;
+  bottom:2%;
+  background:rgba(208, 22, 22, 0);
+}
+
+
+#penBoundingBox:hover ~ #camImg{
+  transition: opacity 0.1s;
+  opacity:0%;
+}
+
+@keyframes bounce {
+  0%{
+    transform:translateY(0)
+  }
+  50%{
+    transform: translateY(-15px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
+  
+}
+
+body:has(#penBoundingBox:hover) .scrollContainer{
+  transition: opacity 0.1s;
+  opacity:100%;
+  display:inline-block;
+}
+
+body:has(#penBoundingBox:not(:hover)) #allPenMarquees{
+  transition: opacity 0.1s;
+  opacity:100%;
+  display:inline-block;
+}
+
+body:has(#penBoundingBox:hover) .filmContainer{
+  display:none;
+}
+
+body:has(#penBoundingBox:not(:hover)) ~ #camBoundingBox:not(:hover) .filmContainer, .scrollContainer{
+  display:none;
+}  
+/* very important code - turns both film reel and marquee display to none if neither images are hovered */
+
+
+
+
+#penBoundingBox:hover ~ #penImg{
+  transition:filter 0.5s linear;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5)) drop-shadow(0rem 0rem 100px var(--aristo-red));
+}
+
+#penBoundingBox:not(:hover) ~ #penImg{
+  transition:filter 0.1s linear;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5));
+}
+
+
+#marquee1, #marquee3{
+  animation: leftScroll 20s linear infinite;
+  font-family: "Lexend",sans-serif;
+
+}
+
+#marquee2, #marquee4{
+  animation:rightScroll 10s linear infinite;
+  font-family: "geller-headline", serif;
+}
+
+.marquee{
+  height:14vh;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  font-size: 1rem;
+
+}
+
+.marquee h2{
+  margin: 30px 0px;
+  margin:none;
+  font-size: clamp(1rem,2rem,2rem);
+  font-weight:none;
+}
+
+@keyframes leftScroll {
+  0%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rightScroll {
+  0%{
+    transform: translateX(-30%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+}
+
+#penImg{
+  width:70%;
+  display:inline-block;
+  grid-column:3/4;
+  grid-row:1/1;
+  z-index: 100;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5));
+  right:10vw;
+  top:17vh;
+  animation:bounce 2s ease-in-out infinite;
+}
+
+.writing{
+  color:var(--aristo-red);
+}
+
+
+/* FILM STYLE */
+
+
+#camImg{
+  width:80%;
+  /* position:absolute; */
+  grid-column: 1/3;
+  grid-row:1/1;
+  z-index: 100;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5));
+  display:inline-block;
+  top:25vh;
+  left:10vw;
+  
+  animation:bounce 2s ease-in-out infinite;
+  /* Add glow on hover yellow like pen */
+}
+
+.filmContainer{
+  max-width: 100%;
+  white-space: nowrap;
+  display: inline-block;
+  overflow:hidden;
+  opacity:0%;
+}
+
+.photo{
+  height:22vh;
+  object-fit: cover;
+  object-position: 15% 30%;
+  --s: 9px; /* control the size */
+ 
+  width: calc(20*var(--s));
+  aspect-ratio: 1.2;
+  background: 
+    conic-gradient(at 50% var(--s),#000000 75%,#0000 0) 
+    0 0/calc(2*var(--s)) calc(100% - var(--s)) padding-box;
+  border: 10px solid #000000;
+  padding: calc(var(--s) * 2) calc(var(--s) * 0);
+  margin-right: calc(-2*var(--s));
+}
+
+#strip1,#strip3{
+  animation:leftScrollFilm 16s linear infinite;  
+}
+
+#strip2{
+  animation:rightScrollFilm 16s linear infinite;
+}
+
+@keyframes leftScrollFilm {
+  0%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes rightScrollFilm{
+  0%{
+    transform: translateX(-50%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+}
+
+
+body:has(#camBoundingBox:hover) #penImg{
+  transition: opacity 0.1s;
+  opacity:0%;
+}
+
+body:has(#camBoundingBox:hover) .filmContainer{
+  transition: opacity 0.2s; 
+  opacity:100%;
+}
+
+body:has(#camBoundingBox:not(:hover)) .filmContainer{
+  transition: opacity 0.1s;
+  opacity:0%;
+}
+
+#camBoundingBox:not(:hover) ~ #camImg{
+  transition:filter 0.1s linear;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5));
+}
+
+#camBoundingBox:hover ~ #camImg{
+  transition:filter 0.3s linear;
+  filter: drop-shadow(1.2rem 1rem 9px rgba(0, 0, 0, 0.5)) drop-shadow(0rem 0rem 30px var(--aristo-dark-yellow));
+}
+
+#camBoundingBox{
+  /* position:absolute; */
+  grid-column: 1/3;
+  grid-row:1/1;
+  position:relative;
+  top:5%;
+  right:2%;
+  z-index: 101;
+  width:65%;
+  height:80%;
+  background:rgba(118, 13, 13, 0);
+  border-radius: 10%;
+  animation:bounce 2s ease-in-out infinite;
+
+  /* is not responsive at all!! */
+
+}
+
+/* PHOTOS PAGE */
+
+
+.imgRow {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  margin:6vw 0;
+  
+}
+.imgColumn {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.imgColumn .picture {
+  margin-top: 10px;
+  vertical-align: middle;
+  width: 100%;
+  cursor: pointer;
+}
+
+.imgColumn .picture:hover{
+  transition:transform 0.2s ease-in;
+  transform: scale(1.03);
+}
+
+.imgColumn .picture:hover ~ .hoverStickPpl{
+  transition:opacity 0.4s;
+  opacity:100%;
+}
+
+.imgColumn .picture:not(:hover) ~ .hoverStickPpl{
+  transition:opacity 0.3s;
+  opacity: 0%;
+}
+
+#runningStick:hover{
+  opacity:100%;
+}
+
+#bookStick:hover{
+  opacity:100%;
+}
+
+#jailStick:hover{
+  opacity:100%;
+}
+
+
+#stairStick:hover{
+  opacity:100%;
+}
+
+.imgColumn .picture:not(:hover){
+  transition:transform 0.2s ease-out;
+  transform: scale(1);
+}
+
+@media screen and (max-width: 800px) {
+  .imgColumn {
+    flex: 50%;
+    max-width: 50%;
+  }
+  .imgRow{
+    margin:24px 0;
+  }
+}
+
+.imgContainer{
+  overflow:hidden;
+  object-fit: cover;
+  position:relative;
+}
+
+.hoverStickPpl{
+  opacity:0%;
+}
+
+
+#runningStick{
+  position:absolute;
+  left: 68%;
+  top:44%;
+  width:10%;
+  z-index: 200;
+}
+
+#stairStick{
+  position:absolute;
+  left: 6%;
+  top:5%;
+  width:10%;
+  z-index: 200;
+}
+
+#bookStick{
+  position:absolute;
+  left: 20%;
+  top:30%;
+  width:35%;
+  z-index: 20;
+}
+
+#jailStick{
+  position:absolute;
+  left: 7%;
+  top:10%;
+  width:78%;
+  z-index: 20;
+}
+
+/* IMAGE LIGHTBOX */
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding:50px 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.947);
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  width: 50%;
+  max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+  color: rgb(0, 0, 0);
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--aristo-red);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Hide the slides by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 2px 10px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  font-family: "futura-pt-bold", sans-serif;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.imgInfo{
+  font-family: "Lexend",sans-serif;
+  text-align: center;
+  margin:5px 0;
+}
+
+
+/* MENU SIDEBAR */
+
+.sideNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: var(--aristo-dark-yellow);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sideNav a{
+  text-decoration: none;
+  color:black;
+  font-size:2rem;
+}
+
+.sideNav a:hover{
+  color:var(--aristo-red);
+}
+
+#navContent{
+  padding:10px 50px;
+}
+
+#navBarClose{
+  margin:2vh 0vh;
+  font-size: clamp(5vw,5vw,12vw);
+}
+
+.sideNav h1{
+  font-size: 10vw;
+}
+
+/* OTHER: VIDEO PAGE */
+
+
+.vidRow {
+  overflow:hidden;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  margin:6vw 0;
+  justify-content: center;
+}
+
+.vidRow iframe{
+  margin: 1vh 0.4vw;
+  border-style: none;
+  width:30%;
+  height:20%;
+}
+
+#featuredVid{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  flex-wrap:wrap;
+  margin: 6vw 0;
+}
+
+#featuredVid iframe{
+  height:30vw;
+  width:50vw;
+  border-style:none;
+}
+
+#featuredVid h2{
+  text-align: center;
+  font-family: "futura-pt-bold", sans-serif;
+  font-size: 2rem;
+  margin:2vw 0;
+  color:var(--aristo-red);
+  
+}
+
+
+#featuredVid img, span {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  margin: auto
+}
+
+#featuredVid span{
+  height: 1.5em;
+  text-align: center;
+  font: 90px/1.5 sans-serif;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 0.em var(--aristo-dark-yellow);
+}
+
+#featuredVid span:hover{
+  color:rgba(255, 255, 255, 0.701);
+}
+
+#wrapper {
+  align-self: center;
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+}
+
+#wrapper>#thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#thumbnail img{
+  height:100%;
+  object-fit: cover;;
+}
